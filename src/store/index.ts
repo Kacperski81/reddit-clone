@@ -5,8 +5,8 @@ import { shallow } from "zustand/shallow";
 
 type UserType = {
     email: string,
-    uid: string,
-    username: string,
+    uid?: string,
+    username?: string,
   }
 
 interface ThemeState {
@@ -23,7 +23,7 @@ const useStore = createWithEqualityFn<ThemeState>()(devtools(persist((set) => ({
         set(state => ({ isDarkTheme: !state.isDarkTheme }))
     },
     user: '',
-    setUser: (user => set({ user })),
+    setUser: user => set({ user }),
     resetUser: () => set({ user: '' })
 }),
     {

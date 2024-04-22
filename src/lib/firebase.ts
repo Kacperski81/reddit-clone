@@ -8,7 +8,7 @@ import { getFirestore, collection,query,where,getDocs,setDoc,doc, getDoc } from 
 import useStore from "../store";
 import {shallow} from "zustand/shallow";
 import { useEffect } from "react";
-import { set } from "firebase/database";
+// import { set } from "firebase/database";
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBsdS-ptOJUrORr8cm3t0RNzMi4gNWNXtw",

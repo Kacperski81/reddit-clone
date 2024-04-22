@@ -12,6 +12,7 @@ import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { FirebaseError } from "@firebase/app";
 import { useNavigate } from "react-router-dom";
+import useStore from "../store";
 
 type FormValues = {
     username: string,
@@ -21,12 +22,16 @@ type FormValues = {
 }
 
 export default function Login() {
+    const setUser = useStore(state => state.setUser);
     const { register, formState: { errors }, handleSubmit } = useForm<FormValues>({ mode: "onBlur" });
     const navigate = useNavigate();
     const mutation = useMutation({mutationFn: loginUser, 
         onSuccess: () => {
             toast.success("Login in successfully");
-            console.log("Login in successfully")
+            if(mutation.variables?.email) {
+                setUser({email: mutation.variables.email.split('@')[0]});
+            }
+            // setUser(mutation.data?.email);
             navigate("/"); 
         },
         onError: (error: unknown) => {

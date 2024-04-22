@@ -53,7 +53,7 @@ export default function Header() {
       <HeaderDarkButton />
       {user ? (
         <>
-          <NavLink to={`/u/${user.username}`}>{user.username}</NavLink>
+          <NavLink to={`/u/${user.username}`}>{user.email}</NavLink>
           <NavLink to="/login" onClick={() => mutation.mutate()}>LOGOUT</NavLink>
         </>
       ) : (
