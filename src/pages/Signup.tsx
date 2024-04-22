@@ -11,6 +11,7 @@ import Error from "../components/shared/form/Error";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { FirebaseError } from "@firebase/app";
+import { useNavigate } from "react-router-dom";
 
 type FormValues = {
     username: string,
@@ -32,9 +33,11 @@ export default function Signup() {
     //       }
     //     },
     //   })
+    const navigate = useNavigate();
     const mutation = useMutation({mutationFn: signupUser, 
         onSuccess: () => {
             toast.success("Sign up successfully");
+            navigate("/");
         },
         onError: (error: unknown) => {
             if(error instanceof FirebaseError) {

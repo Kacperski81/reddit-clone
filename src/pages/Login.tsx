@@ -11,6 +11,7 @@ import Error from "../components/shared/form/Error";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { FirebaseError } from "@firebase/app";
+import { useNavigate } from "react-router-dom";
 
 type FormValues = {
     username: string,
@@ -21,10 +22,12 @@ type FormValues = {
 
 export default function Login() {
     const { register, formState: { errors }, handleSubmit } = useForm<FormValues>({ mode: "onBlur" });
-
+    const navigate = useNavigate();
     const mutation = useMutation({mutationFn: loginUser, 
         onSuccess: () => {
             toast.success("Login in successfully");
+            console.log("Login in successfully")
+            navigate("/"); 
         },
         onError: (error: unknown) => {
             if(error instanceof FirebaseError) {
@@ -42,7 +45,6 @@ export default function Login() {
         }
         });
     function onSubmit(data: FormValues) {
-
         const { email, password } = data;
         const variables = { email, password };
         // await signupUser({ username, email, password});

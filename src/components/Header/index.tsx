@@ -33,6 +33,7 @@ const Wrapper = styled.header`
 
 export default function Header() {
   const [user,resetUser] = useStore(state => [state.user, state.resetUser], shallow);
+  console.log(user)
 
   const mutation = useMutation({mutationFn: logOut,
     onSuccess: () => {
